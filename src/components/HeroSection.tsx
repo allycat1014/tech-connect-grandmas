@@ -34,7 +34,7 @@ export const HeroSection = () => {
               <Button 
                 size="lg" 
                 variant="outline"
-                className="text-lg px-8 py-6 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                className="text-lg px-8 py-6 border-primary-foreground/30 text-foreground bg-primary-foreground/95 hover:bg-primary-foreground"
                 onClick={() => scrollToSection('volunteer')}
               >
                 <Users className="mr-2 h-5 w-5" />
