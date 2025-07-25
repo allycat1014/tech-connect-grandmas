@@ -242,7 +242,7 @@ export const VolunteerForm = () => {
                 <div className="space-y-3">
                   <Label className="text-base font-medium">How can you help? (select all that apply)</Label>
                   <div className="space-y-2">
-                    {["Video calls", "Phone calls", "In-person (if in same area)"].map((type) => (
+                    {["Video calls", "Phone calls"].map((type) => (
                       <div key={type} className="flex items-center space-x-2">
                         <Checkbox
                           id={type}

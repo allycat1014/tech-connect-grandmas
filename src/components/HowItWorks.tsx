@@ -19,7 +19,7 @@ const steps = [
   {
     icon: Users,
     title: "Connect & Learn",
-    description: "Meet via video call, phone, or in person. Volunteers provide patient, friendly tech support tailored to each senior's learning style.",
+    description: "Meet via video call or phone. Volunteers provide patient, friendly tech support tailored to each senior's learning style and comfort level.",
     bgColor: "bg-warm/20",
     iconColor: "text-warm-foreground"
   },

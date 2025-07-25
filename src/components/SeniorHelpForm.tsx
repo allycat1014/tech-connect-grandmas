@@ -200,7 +200,6 @@ export const SeniorHelpForm = () => {
                     <SelectContent>
                       <SelectItem value="video" className="text-base">Video Call (online)</SelectItem>
                       <SelectItem value="phone" className="text-base">Phone Call</SelectItem>
-                      <SelectItem value="in-person" className="text-base">In Person (if available in your area)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
