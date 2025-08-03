@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, Smartphone, Monitor, Wifi } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const techHelpTypes = [
   { value: "smartphone", label: "Smartphone/iPhone", icon: Smartphone },
@@ -37,23 +38,51 @@ export const SeniorHelpForm = () => {
     meetingType: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically submit to a backend
-    toast({
-      title: "Help Request Submitted!",
-      description: "We'll match you with a volunteer and send you confirmation details via email.",
-    });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      helpType: "",
-      description: "",
-      preferredDate: "",
-      preferredTime: "",
-      meetingType: ""
-    });
+    
+    try {
+      const { error } = await supabase
+        .from('help_requests')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            help_type: formData.helpType,
+            description: formData.description,
+            preferred_date: formData.preferredDate,
+            preferred_time: formData.preferredTime,
+            meeting_type: formData.meetingType
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Help Request Submitted!",
+        description: "We'll match you with a volunteer and send you confirmation details via email.",
+      });
+      
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        helpType: "",
+        description: "",
+        preferredDate: "",
+        preferredTime: "",
+        meetingType: ""
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your request. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {

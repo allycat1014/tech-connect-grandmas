@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Users, Heart, Calendar, Clock, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const techSkills = [
   "Smartphones/iPhone", "Android phones", "Computers/Laptops", "Internet/WiFi",
@@ -38,21 +39,54 @@ export const VolunteerForm = () => {
     meetingTypes: [] as string[]
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Thank you for volunteering!",
-      description: "We've received your application. We'll notify you when seniors need help in your area of expertise.",
-    });
-    setFormData({
-      name: "",
-      email: "",
-      age: "",
-      experience: "",
-      skills: [],
-      availability: {},
-      meetingTypes: []
-    });
+    
+    try {
+      // Convert availability object to array format for database storage
+      const availabilityArray = Object.entries(formData.availability).flatMap(([day, times]) =>
+        times.map(time => `${day} ${time}`)
+      );
+
+      const { error } = await supabase
+        .from('volunteer_applications')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            age: formData.age,
+            skills: formData.skills,
+            experience: formData.experience,
+            availability: availabilityArray,
+            meeting_types: formData.meetingTypes
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Thank you for volunteering!",
+        description: "We've received your application. We'll notify you when seniors need help in your area of expertise.",
+      });
+      
+      setFormData({
+        name: "",
+        email: "",
+        age: "",
+        experience: "",
+        skills: [],
+        availability: {},
+        meetingTypes: []
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your application. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleSkillToggle = (skill: string) => {
