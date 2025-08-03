@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      help_requests: {
+        Row: {
+          created_at: string
+          description: string | null
+          email: string
+          help_type: string
+          id: string
+          meeting_type: string
+          name: string
+          phone: string | null
+          preferred_date: string | null
+          preferred_time: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          email: string
+          help_type: string
+          id?: string
+          meeting_type: string
+          name: string
+          phone?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          email?: string
+          help_type?: string
+          id?: string
+          meeting_type?: string
+          name?: string
+          phone?: string | null
+          preferred_date?: string | null
+          preferred_time?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      volunteer_applications: {
+        Row: {
+          age: string
+          availability: string[] | null
+          created_at: string
+          email: string
+          experience: string | null
+          id: string
+          meeting_types: string[] | null
+          name: string
+          skills: string[] | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          age: string
+          availability?: string[] | null
+          created_at?: string
+          email: string
+          experience?: string | null
+          id?: string
+          meeting_types?: string[] | null
+          name: string
+          skills?: string[] | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          age?: string
+          availability?: string[] | null
+          created_at?: string
+          email?: string
+          experience?: string | null
+          id?: string
+          meeting_types?: string[] | null
+          name?: string
+          skills?: string[] | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
