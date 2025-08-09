@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Users, Clock } from "lucide-react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Heart, Users, Clock, Info } from "lucide-react";
 import heroImage from "@/assets/hero-help.jpg";
 
 export const HeroSection = () => {
@@ -9,6 +10,48 @@ export const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center bg-gradient-hero overflow-hidden">
+      {/* About Button - Top Left Corner */}
+      <HoverCard openDelay={200} closeDelay={200}>
+        <HoverCardTrigger asChild>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="absolute top-6 left-6 z-10 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10 border border-primary-foreground/20"
+          >
+            <Info className="mr-2 h-4 w-4" />
+            About
+          </Button>
+        </HoverCardTrigger>
+        <HoverCardContent 
+          side="bottom" 
+          align="start" 
+          className="w-96 p-6 animate-fade-in bg-card border-border shadow-lg"
+        >
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-foreground">
+              Why I Created Tech Connect Grandmas
+            </h3>
+            <div className="space-y-3">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                [Add your personal story here - perhaps about a grandparent who struggled with technology, 
+                or your own experience helping seniors navigate the digital world]
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                [Share what drives your passion for this cause and why you believe 
+                technology should be accessible to everyone, regardless of age]
+              </p>
+            </div>
+            <div className="bg-muted/50 rounded-lg p-4 border-l-4 border-primary">
+              <h4 className="text-sm font-medium text-foreground mb-2">My Mission</h4>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                To ensure that no senior feels left behind in our increasingly digital world. 
+                Every person deserves to feel confident and connected, regardless of their age or tech experience.
+              </p>
+            </div>
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+
       <div className="container mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left space-y-8">
