@@ -33,12 +33,18 @@ export const HeroSection = () => {
             </h3>
             <div className="space-y-3">
               <p className="text-sm text-muted-foreground leading-relaxed">
-                [Add your personal story here - perhaps about a grandparent who struggled with technology, 
-                or your own experience helping seniors navigate the digital world]
+                Hi, I'm Ananya, a high school student with a passion for bridging generations through technology. 
+                This journey started when I began helping my grandma navigate her phone and other devices.
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                [Share what drives your passion for this cause and why you believe 
-                technology should be accessible to everyone, regardless of age]
+                What began as simple tech support became something much more meaningful. Those moments when she needed help 
+                with her phone sparked new conversations and brought us closer together. Technology became our bridge - 
+                a way to connect across generations and share in the digital world that shapes so much of our daily lives.
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                I realized that countless other seniors face similar challenges but may not have someone nearby to help. 
+                That's why I created Tech Connect Grandmas - to ensure every senior has access to patient, caring support 
+                as they navigate our increasingly digital world.
               </p>
             </div>
             <div className="bg-muted/50 rounded-lg p-4 border-l-4 border-primary">
