@@ -19,7 +19,7 @@ export const HeroSection = () => {
             className="absolute top-6 left-6 z-10 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/10 border border-primary-foreground/20"
           >
             <Info className="mr-2 h-4 w-4" />
-            About
+            About Me
           </Button>
         </HoverCardTrigger>
         <HoverCardContent 
