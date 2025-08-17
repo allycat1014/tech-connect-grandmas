@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, Smartphone, Monitor, Wifi } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/api";
 
 const techHelpTypes = [
   { value: "smartphone", label: "Smartphone/iPhone", icon: Smartphone },
@@ -42,23 +42,19 @@ export const SeniorHelpForm = () => {
     e.preventDefault();
     
     try {
-      const { error } = await supabase
-        .from('help_requests')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            help_type: formData.helpType,
-            description: formData.description,
-            preferred_date: formData.preferredDate,
-            preferred_time: formData.preferredTime,
-            meeting_type: formData.meetingType
-          }
-        ]);
+      const result = await api.submitHelpRequest({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        help_type: formData.helpType,
+        description: formData.description,
+        preferred_date: formData.preferredDate,
+        preferred_time: formData.preferredTime,
+        meeting_type: formData.meetingType
+      });
 
-      if (error) {
-        throw error;
+      if (!result.success) {
+        throw new Error(result.error);
       }
 
       toast({

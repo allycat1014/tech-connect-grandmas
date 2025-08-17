@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Users, Heart, Calendar, Clock, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { api } from "@/lib/api";
 
 const techSkills = [
   "Smartphones/iPhone", "Android phones", "Computers/Laptops", "Internet/WiFi",
@@ -48,22 +48,18 @@ export const VolunteerForm = () => {
         times.map(time => `${day} ${time}`)
       );
 
-      const { error } = await supabase
-        .from('volunteer_applications')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            age: formData.age,
-            skills: formData.skills,
-            experience: formData.experience,
-            availability: availabilityArray,
-            meeting_types: formData.meetingTypes
-          }
-        ]);
+      const result = await api.submitVolunteerApplication({
+        name: formData.name,
+        email: formData.email,
+        age: formData.age,
+        skills: formData.skills,
+        experience: formData.experience,
+        availability: availabilityArray,
+        meeting_types: formData.meetingTypes
+      });
 
-      if (error) {
-        throw error;
+      if (!result.success) {
+        throw new Error(result.error);
       }
 
       toast({
